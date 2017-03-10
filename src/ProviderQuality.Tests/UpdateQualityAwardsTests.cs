@@ -235,5 +235,47 @@ namespace ProviderQuality.Tests
 
         }//end method
 
+        [TestMethod]
+        public void TestNonBlueAwardTypePreExpirationDepreciation()
+        {
+            //Case: Quality depreciates by 1 prior expiration
+
+            int expected = 29;
+
+            var app = new Program()
+            {
+                Awards = new List<Award>
+                {
+                       new Award {Name = "Top Connected Providres", SellIn = 10, Quality = 30}
+                }
+
+            };
+
+            app.UpdateQuality();
+            Assert.AreEqual(expected, app.Awards[0].Quality);
+
+        }//end method
+
+        [TestMethod]
+        public void TestNonBlueAwardTypePostExpirationDepreciation()
+        {
+            //Case: Quality depreciates by 1 prior expiration
+
+            int expected = 28;
+
+            var app = new Program()
+            {
+                Awards = new List<Award>
+                {
+                       new Award {Name = "Top Connected Providres", SellIn = -5, Quality = 30}
+                }
+
+            };
+
+            app.UpdateQuality();
+            Assert.AreEqual(expected, app.Awards[0].Quality);
+
+        }//end method
+
     }
 }
