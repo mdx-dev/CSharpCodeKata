@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace ProviderQuality.Console
 {
     public class Award
+
+        _
     {
         public string Name { get; set; }
 
