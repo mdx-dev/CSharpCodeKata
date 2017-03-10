@@ -215,6 +215,7 @@ namespace ProviderQuality.Tests
 
         }//end method
 
+        //Award class -------------------------------------------------------
         [TestMethod]
         public void TestNegativeQualityIsSetToZero()
         {
@@ -235,6 +236,8 @@ namespace ProviderQuality.Tests
 
         }//end method
 
+
+        //Non Blue ----------------------------------------------------------
         [TestMethod]
         public void TestNonBlueAwardTypePreExpirationDepreciation()
         {
