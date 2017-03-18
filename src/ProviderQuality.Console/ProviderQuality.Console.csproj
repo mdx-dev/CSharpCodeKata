@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Award\Algorithm\ConstantQualityAlgorithm.cs" />
     <Compile Include="Award\Algorithm\IAwardAlgorithm.cs" />
     <Compile Include="Award\AwardBase.cs" />
     <Compile Include="Award\AcmePartnerFacilityAward.cs" />
