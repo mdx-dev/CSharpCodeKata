@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+
+using ProviderQuality.Console.Award;
 
 namespace ProviderQuality.Console
 {
@@ -8,25 +11,19 @@ namespace ProviderQuality.Console
         {
             System.Console.WriteLine("Updating award metrics...!");
 
-            //new Award {Name = "Gov Quality Plus", SellIn = 10, Quality = 20},
-            //new Award {Name = "Blue First", SellIn = 2, Quality = 0},
-            //new Award {Name = "ACME Partner Facility", SellIn = 5, Quality = 7},
-            //new Award {Name = "Blue Distinction Plus", SellIn = 0, Quality = 80},
-            //new Award {Name = "Blue Compare", SellIn = 15, Quality = 20},
-            //new Award {Name = "Top Connected Providres", SellIn = 3, Quality = 6}
-
-            var app = new Program()
+            var set = new AwardSet(new IAward[]
             {
-            };
-
-            app.UpdateQuality();
+                new GovQualityPlusAward(20,TimeSpan.FromDays(10)),
+                new BlueFirstAward(0,TimeSpan.FromDays(2)),
+                new AcmePartnerFacilityAward(7,TimeSpan.FromDays(5)),
+                new BlueDistinctionPlusAward(TimeSpan.FromDays(0)),
+                new BlueCompareAward(20,TimeSpan.FromDays(15)),
+                new TopConnectedProvidersAward(3,TimeSpan.FromDays(6)),
+                new BlueFirstAward(30,TimeSpan.FromDays(3)),
+            });
+            set.Update();
 
             System.Console.ReadKey();
-
-        }
-
-        public void UpdateQuality()
-        {
         }
     }
 }
