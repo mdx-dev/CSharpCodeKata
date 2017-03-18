@@ -17,7 +17,7 @@ namespace ProviderQuality.Console
             this.Awards = awards.ToList();
         }
 
-        public void Update()
+        public void UpdateAwards()
         {
             foreach(var award in Awards)
             {

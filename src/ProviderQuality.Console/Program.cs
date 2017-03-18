@@ -21,7 +21,7 @@ namespace ProviderQuality.Console
                 new TopConnectedProvidersAward(3,TimeSpan.FromDays(6)),
                 new BlueFirstAward(30,TimeSpan.FromDays(3)),
             });
-            set.Update();
+            set.UpdateAwards();
 
             System.Console.ReadKey();
         }

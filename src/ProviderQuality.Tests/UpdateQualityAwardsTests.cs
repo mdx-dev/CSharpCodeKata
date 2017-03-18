@@ -440,11 +440,11 @@ namespace ProviderQuality.Tests
             Assert.IsTrue(set.Awards.All(award => award.IsNotExpired));
             Assert.IsTrue(set.Awards.All(award => award.Quality == 10));
 
-            set.Update();
+            set.UpdateAwards();
             Assert.IsTrue(set.Awards.All(award => award.IsNotExpired));
             Assert.IsTrue(set.Awards.All(award => award.Quality == 9));
 
-            set.Update();
+            set.UpdateAwards();
             Assert.IsTrue(set.Awards.All(award => award.IsExpired));
             Assert.IsTrue(set.Awards.All(award => award.Quality == 7));
 
