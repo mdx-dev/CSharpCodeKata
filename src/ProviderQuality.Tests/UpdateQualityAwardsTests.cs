@@ -270,5 +270,159 @@ namespace ProviderQuality.Tests
             award = algo.Update(award);
             Assert.AreEqual(7, award.Quality);
         }
+
+        [TestMethod]
+        public void Award_AcmePartnerFacility()
+        {
+            IAward award = new AcmePartnerFacilityAward(10, TimeSpan.FromDays(1));
+            var algo = award.UpdateAlgorithm;
+
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+            Assert.AreEqual(10, award.Quality);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(9, award.Quality);
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(7, award.Quality);
+            Assert.IsTrue(award.IsExpired);
+            Assert.IsFalse(award.IsNotExpired);
+        }
+
+        [TestMethod]
+        public void Award_BlueCompare()
+        {
+            IAward award = new BlueCompareAward(0, TimeSpan.FromDays(15));
+            var algo = award.UpdateAlgorithm;
+            
+            var runner = new AwardAlgorithmRunner(algo);
+            runner.Add(award);
+
+            runner.RunAlgorithmWithDayIncrement(16);
+
+            var expected = new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 14, 17, 20, 23, 26, 29, 32, 0 };
+
+            CollectionAssert.AreEqual(expected, runner.AwardInfos[0].history);
+        }
+
+        [TestMethod]
+        public void Award_BlueDistinctionPlus()
+        {
+            IAward award = new BlueDistinctionPlusAward(TimeSpan.FromDays(1));
+            var algo = award.UpdateAlgorithm;
+
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+            Assert.AreEqual(80, award.Quality);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(80, award.Quality);
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(80, award.Quality);
+            Assert.IsTrue(award.IsExpired);
+            Assert.IsFalse(award.IsNotExpired);
+        }
+
+        [TestMethod]
+        public void Award_BlueFirstAward()
+        {
+            IAward award = new BlueFirstAward(10, TimeSpan.FromDays(1));
+            var algo = award.UpdateAlgorithm;
+
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+            Assert.AreEqual(10, award.Quality);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(11, award.Quality);
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(12, award.Quality);
+            Assert.IsTrue(award.IsExpired);
+            Assert.IsFalse(award.IsNotExpired);
+        }
+
+        [TestMethod]
+        public void Award_BlueStar()
+        {
+            IAward award = new BlueStarAward(10, TimeSpan.FromDays(1));
+            var algo = award.UpdateAlgorithm;
+
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+            Assert.AreEqual(10, award.Quality);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(8, award.Quality);
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(4, award.Quality);
+            Assert.IsTrue(award.IsExpired);
+            Assert.IsFalse(award.IsNotExpired);
+        }
+
+        [TestMethod]
+        public void Award_GovQualityPlusAward()
+        {
+            IAward award = new GovQualityPlusAward(10, TimeSpan.FromDays(1));
+            var algo = award.UpdateAlgorithm;
+
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+            Assert.AreEqual(10, award.Quality);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(9, award.Quality);
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(7, award.Quality);
+            Assert.IsTrue(award.IsExpired);
+            Assert.IsFalse(award.IsNotExpired);
+        }
+
+        [TestMethod]
+        public void Award_TopConnectedProviders()
+        {
+            IAward award = new TopConnectedProvidersAward(10, TimeSpan.FromDays(1));
+            var algo = award.UpdateAlgorithm;
+
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+            Assert.AreEqual(10, award.Quality);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(9, award.Quality);
+            Assert.IsFalse(award.IsExpired);
+            Assert.IsTrue(award.IsNotExpired);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.AreEqual(7, award.Quality);
+            Assert.IsTrue(award.IsExpired);
+            Assert.IsFalse(award.IsNotExpired);
+        }
     }
 }
