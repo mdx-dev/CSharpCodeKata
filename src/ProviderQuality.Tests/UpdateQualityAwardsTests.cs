@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProviderQuality.Console;
@@ -421,6 +422,39 @@ namespace ProviderQuality.Tests
             Assert.AreEqual(7, award.Quality);
             Assert.IsTrue(award.IsExpired);
             Assert.IsFalse(award.IsNotExpired);
+        }
+
+        [TestMethod]
+        public void AwardSet()
+        {
+            var set = new AwardSet(new IAward[] {
+                new TopConnectedProvidersAward(10, TimeSpan.FromDays(1)),
+                new GovQualityPlusAward(10, TimeSpan.FromDays(1)),
+                new AcmePartnerFacilityAward(10,TimeSpan.FromDays(1))
+            });
+
+            Assert.AreEqual(0, set.GetExpired().Count);
+            Assert.AreEqual(0, set.GetExpiring(2).Count);
+            Assert.AreEqual(3, set.GetExpiring(1).Count);
+
+            Assert.IsTrue(set.Awards.All(award => award.IsNotExpired));
+            Assert.IsTrue(set.Awards.All(award => award.Quality == 10));
+
+            set.Update();
+            Assert.IsTrue(set.Awards.All(award => award.IsNotExpired));
+            Assert.IsTrue(set.Awards.All(award => award.Quality == 9));
+
+            set.Update();
+            Assert.IsTrue(set.Awards.All(award => award.IsExpired));
+            Assert.IsTrue(set.Awards.All(award => award.Quality == 7));
+
+            Assert.AreEqual(3, set.GetByCutoffQuality(7).Count);
+            Assert.AreEqual(0, set.GetByCutoffQuality(8).Count);
+
+            Assert.AreEqual(0, set.GetByType(typeof(BlueCompareAlgorithm)).Count);
+            Assert.AreEqual(1, set.GetByType(typeof(TopConnectedProvidersAward)).Count);
+            
+            Assert.AreEqual(3, set.GetExpired().Count);
         }
     }
 }
