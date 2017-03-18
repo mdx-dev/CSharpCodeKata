@@ -45,6 +45,7 @@
     <Compile Include="Award\AcmePartnerFacilityAward.cs" />
     <Compile Include="Award\BlueDistinctionPlusAward.cs" />
     <Compile Include="Award\BlueCompareAward.cs" />
+    <Compile Include="Award\BlueFirstAward.cs" />
     <Compile Include="Award\TopConnectedProvidersAward.cs" />
     <Compile Include="Award\GovQualityPlusAward.cs" />
     <Compile Include="Award\IAward.cs" />
