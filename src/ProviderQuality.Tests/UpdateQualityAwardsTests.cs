@@ -143,12 +143,6 @@ namespace ProviderQuality.Tests
                 Assert.AreEqual(50-(i * 2), history[i], $"Algorithm history mismatch on iteration '{i}'");
         }
 
-
-
-
-
-
-
         [TestMethod]
         public void Algorithm_QualityStep_PostExpiration_IncrementingBy1()
         {
@@ -297,6 +291,10 @@ namespace ProviderQuality.Tests
         [TestMethod]
         public void Award_BlueCompare()
         {
+            // we don't explicitly test for expiration here, the behavior of this particular
+            // award is fairly complex and relies on the expiration functionality working properly.
+            // If the algorithm works as expected, the expiration is necessarily working as expected.
+            //
             IAward award = new BlueCompareAward(0, TimeSpan.FromDays(15));
             var algo = award.UpdateAlgorithm;
             
