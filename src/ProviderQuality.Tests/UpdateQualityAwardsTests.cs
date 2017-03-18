@@ -11,6 +11,57 @@ namespace ProviderQuality.Tests
     public class UpdateQualityAwardsTests
     {
         [TestMethod]
+        public void Algorithm_BlueCompare_Expired()
+        {
+            var algo = new BlueCompareAlgorithm();
+            IAward award = new BlueCompareAward(50,TimeSpan.FromDays(0));
+
+            award.IncrementDay();
+            Assert.IsTrue(award.IsExpired);
+            Assert.AreEqual(50,award.Quality);
+            algo.Update(award);
+            Assert.AreEqual(0, award.Quality);
+            
+            for (var i = 0; i < 25; i++)
+            {
+                award = algo.Update(award);
+                Assert.AreEqual(0, award.Quality,
+                    $"Quality is non-zero on iteration '{i}'");
+            }
+        }
+
+        [TestMethod]
+        public void Algorithm_BlueCompare_AcrossExpiration()
+        {
+            var algo = new BlueCompareAlgorithm();
+            IAward award = new BlueCompareAward(50, TimeSpan.FromDays(0));
+
+            Assert.IsFalse(award.IsExpired);
+            award = algo.Update(award);
+            Assert.IsTrue(award.Quality > 0);
+
+            award.IncrementDay();
+            award = algo.Update(award);
+            Assert.IsTrue(award.IsExpired);
+            Assert.AreEqual(0, award.Quality);
+        }
+
+        [TestMethod]
+        public void Algorithm_BlueCompare()
+        {
+            var algo = new BlueCompareAlgorithm();
+            IAward award = new BlueCompareAward(0, TimeSpan.FromDays(15));
+            var runner = new AwardAlgorithmRunner(algo);
+            runner.Add(award);
+
+            runner.RunAlgorithmWithDayIncrement(16);
+
+            var expected = new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 14, 17, 20, 23, 26, 29, 32, 0 };
+
+            CollectionAssert.AreEqual(expected, runner.AwardInfos[0].history);
+        }
+
+        [TestMethod]
         public void Algorithm_ConstantQuality()
         {
             var algo = new ConstantQualityAlgorithm();
