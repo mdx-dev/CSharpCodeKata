@@ -17,7 +17,7 @@ namespace ProviderQuality.Console.Award.Algorithm
             this.PostExpiration_QualityStep = postExpiration_QualityStep;
         }
 
-        public IAward Update(IAward award)
+        public IAward Run(IAward award)
         {
             var step = this.PreExpiration_QualityStep;
 

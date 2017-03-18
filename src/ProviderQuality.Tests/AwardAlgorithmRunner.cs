@@ -47,7 +47,7 @@ namespace ProviderQuality.Tests
                 {
                     if(incrementDay)
                         info.award.IncrementDay();
-                    info.award = this.Algorithm.Update(info.award);
+                    info.award = this.Algorithm.Run(info.award);
                     info.history.Add(info.award.Quality);
                 }
             }

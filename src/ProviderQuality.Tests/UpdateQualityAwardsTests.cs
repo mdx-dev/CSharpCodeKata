@@ -20,12 +20,12 @@ namespace ProviderQuality.Tests
             award.IncrementDay();
             Assert.IsTrue(award.IsExpired);
             Assert.AreEqual(50,award.Quality);
-            algo.Update(award);
+            algo.Run(award);
             Assert.AreEqual(0, award.Quality);
             
             for (var i = 0; i < 25; i++)
             {
-                award = algo.Update(award);
+                award = algo.Run(award);
                 Assert.AreEqual(0, award.Quality,
                     $"Quality is non-zero on iteration '{i}'");
             }
@@ -38,11 +38,11 @@ namespace ProviderQuality.Tests
             IAward award = new BlueCompareAward(50, TimeSpan.FromDays(0));
 
             Assert.IsFalse(award.IsExpired);
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.IsTrue(award.Quality > 0);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.IsTrue(award.IsExpired);
             Assert.AreEqual(0, award.Quality);
         }
@@ -71,7 +71,7 @@ namespace ProviderQuality.Tests
             var originalQuality = award.Quality;
             for(var i = 0; i < 50; i++)
             {
-                award = algo.Update(award);
+                award = algo.Run(award);
                 Assert.AreEqual(originalQuality, award.Quality, 
                     $"Quality changed from '{originalQuality}' to '{award.Quality}' on iteration '{i}'");
             }
@@ -236,13 +236,13 @@ namespace ProviderQuality.Tests
 
             award.IncrementDay();
             Assert.IsFalse(award.IsExpired);
-            award = algo.Update(award);
+            award = algo.Run(award);
 
             Assert.AreEqual(1, award.Quality);
 
             award.IncrementDay();
             Assert.IsTrue(award.IsExpired);
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(3, award.Quality);
         }
 
@@ -256,13 +256,13 @@ namespace ProviderQuality.Tests
 
             award.IncrementDay();
             Assert.IsFalse(award.IsExpired);
-            award = algo.Update(award);
+            award = algo.Run(award);
 
             Assert.AreEqual(9, award.Quality);
 
             award.IncrementDay();
             Assert.IsTrue(award.IsExpired);
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(7, award.Quality);
         }
 
@@ -277,13 +277,13 @@ namespace ProviderQuality.Tests
             Assert.AreEqual(10, award.Quality);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(9, award.Quality);
             Assert.IsFalse(award.IsExpired);
             Assert.IsTrue(award.IsNotExpired);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(7, award.Quality);
             Assert.IsTrue(award.IsExpired);
             Assert.IsFalse(award.IsNotExpired);
@@ -320,13 +320,13 @@ namespace ProviderQuality.Tests
             Assert.AreEqual(80, award.Quality);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(80, award.Quality);
             Assert.IsFalse(award.IsExpired);
             Assert.IsTrue(award.IsNotExpired);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(80, award.Quality);
             Assert.IsTrue(award.IsExpired);
             Assert.IsFalse(award.IsNotExpired);
@@ -343,13 +343,13 @@ namespace ProviderQuality.Tests
             Assert.AreEqual(10, award.Quality);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(11, award.Quality);
             Assert.IsFalse(award.IsExpired);
             Assert.IsTrue(award.IsNotExpired);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(12, award.Quality);
             Assert.IsTrue(award.IsExpired);
             Assert.IsFalse(award.IsNotExpired);
@@ -366,13 +366,13 @@ namespace ProviderQuality.Tests
             Assert.AreEqual(10, award.Quality);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(8, award.Quality);
             Assert.IsFalse(award.IsExpired);
             Assert.IsTrue(award.IsNotExpired);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(4, award.Quality);
             Assert.IsTrue(award.IsExpired);
             Assert.IsFalse(award.IsNotExpired);
@@ -389,13 +389,13 @@ namespace ProviderQuality.Tests
             Assert.AreEqual(10, award.Quality);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(9, award.Quality);
             Assert.IsFalse(award.IsExpired);
             Assert.IsTrue(award.IsNotExpired);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(7, award.Quality);
             Assert.IsTrue(award.IsExpired);
             Assert.IsFalse(award.IsNotExpired);
@@ -412,13 +412,13 @@ namespace ProviderQuality.Tests
             Assert.AreEqual(10, award.Quality);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(9, award.Quality);
             Assert.IsFalse(award.IsExpired);
             Assert.IsTrue(award.IsNotExpired);
 
             award.IncrementDay();
-            award = algo.Update(award);
+            award = algo.Run(award);
             Assert.AreEqual(7, award.Quality);
             Assert.IsTrue(award.IsExpired);
             Assert.IsFalse(award.IsNotExpired);

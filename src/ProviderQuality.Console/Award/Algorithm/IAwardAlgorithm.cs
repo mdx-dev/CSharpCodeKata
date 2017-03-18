@@ -8,6 +8,6 @@ namespace ProviderQuality.Console.Award.Algorithm
 {
     public interface IAwardAlgorithm
     {
-        IAward Update(IAward award);
+        IAward Run(IAward award);
     }
 }

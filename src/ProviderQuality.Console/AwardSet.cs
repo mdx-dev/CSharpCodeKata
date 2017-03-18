@@ -22,7 +22,7 @@ namespace ProviderQuality.Console
             foreach(var award in Awards)
             {
                 award.IncrementDay();
-                award.UpdateAlgorithm.Update(award);
+                award.UpdateAlgorithm.Run(award);
             }
         }
 

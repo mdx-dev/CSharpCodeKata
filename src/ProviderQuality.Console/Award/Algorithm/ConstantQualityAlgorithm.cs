@@ -8,7 +8,7 @@ namespace ProviderQuality.Console.Award.Algorithm
 {
     public class ConstantQualityAlgorithm : IAwardAlgorithm
     {
-        public IAward Update(IAward award)
+        public IAward Run(IAward award)
         {
             return award;
         }

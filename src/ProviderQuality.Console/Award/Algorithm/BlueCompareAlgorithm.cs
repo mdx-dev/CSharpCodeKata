@@ -8,7 +8,7 @@ namespace ProviderQuality.Console.Award.Algorithm
 {
     public class BlueCompareAlgorithm : IAwardAlgorithm
     {
-        public IAward Update(IAward award)
+        public IAward Run(IAward award)
         {
             if(award.IsExpired)
             {
