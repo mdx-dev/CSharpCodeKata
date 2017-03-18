@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ProviderQuality.Console.Award.Algorithm;
+
 namespace ProviderQuality.Console.Award
 {
     abstract public class AwardBase : IAward
@@ -14,6 +16,8 @@ namespace ProviderQuality.Console.Award
         public int DaysUntilExpiration { get; private set; }
         public bool IsExpired          { get { return DaysUntilExpiration < 0; } }
         public bool IsNotExpired       { get { return !this.IsExpired; } }
+
+        public IAwardAlgorithm UpdateAlgorithm { get; protected set; }
 
         public AwardBase(int initialQuality, TimeSpan expirationTime)
         {

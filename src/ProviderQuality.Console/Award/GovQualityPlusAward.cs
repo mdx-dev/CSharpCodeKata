@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ProviderQuality.Console.Award.Algorithm;
+
 namespace ProviderQuality.Console.Award
 {
     public class GovQualityPlusAward : AwardBase
@@ -12,6 +14,9 @@ namespace ProviderQuality.Console.Award
 
         public GovQualityPlusAward(int initialQuality, TimeSpan expirationTime) : base(initialQuality, expirationTime)
         {
+            var preExpirationStep = -1;
+            var postExpirationStep = -2;
+            this.UpdateAlgorithm = new QualityStepAlgorithm(preExpirationStep, postExpirationStep);
         }
     }
 }
