@@ -1,4 +1,4 @@
-# Vitals Code Test
+# Sapphire Digital (.NET) Code Test
 
 # Description
 Hi, and welcome to the team! As you know, we provide tools for searching for doctors and hospitals (i.e. "providers") based on various criteria. One type of search that we provide is to find providers that are highly rated by quality.
@@ -38,9 +38,9 @@ Here is the business story:
 - Acceptance Criteria
   - "Blue Star" awards should lose quality value twice as fast as normal awards.
 
-If you are familiar with Git (preferred) please fork the code and submit a link to your fork with your changes when you have completed the assignment.  If you are not familiar with Git you may download the source as a zip file and later submit the modified archive.  In all cases you should be able to use the free version of Visual Studio 2015 to make the changes.
+If you are familiar with Git (preferred) please fork the code and submit a link to your fork with your changes when you have completed the assignment.  If you are not familiar with Git you may download the source as a zip file and later submit the modified archive.  In all cases you should be able to use a free version of Visual Studio (on Windows) to make the changes.
 
 The existing code is "legacy", and, ugh, it's ugly. Feel free to make any changes to the code as long as everything still works correctly.
 
 ## Installation Hints
-Once loaded in Visual Studio any dependent nuget packages should restore automatically.  You can also run the Build.bat file from the command line to restore packages and build the code.  At the end of the exercise we should be ample confidence in adding the "Blue Star" award to our configuration knowing it will be propery curated when the existing application runs.
+Once loaded in Visual Studio any dependent nuget packages should restore automatically.  You can also run the Build.bat file from the command line to restore packages and build the code.  At the end of the exercise we should have ample confidence in adding the "Blue Star" award to our configuration knowing it will be propery curated when the existing application runs.
